@@ -1,0 +1,15 @@
+{% extends 'cadastro/base.html' %}
+
+{% block titulo %} - Cadastrar Pessoa{% endblock %}
+
+{% block conteudo %}
+    <h1>Cadastrar Pessoa</h1>
+
+    <p>Preencha todos os campos.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}
