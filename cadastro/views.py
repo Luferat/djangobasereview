@@ -1,9 +1,9 @@
 # cadastro\views.py
 
 from django.shortcuts import get_object_or_404, redirect, render
-
 from cadastro.forms import PessoaForm
 from cadastro.models import Pessoa
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -27,7 +27,7 @@ def index(request):
 def contato(request):
     return render(request, 'cadastro/contato.html')
 
-
+@login_required
 def adicionar(request):
     if request.method == 'POST':
         form = PessoaForm(request.POST)
@@ -44,7 +44,7 @@ def detalhe(request, id):
     pessoa = get_object_or_404(Pessoa, id=id)
     return render(request, 'cadastro/detalhe.html', {'pessoa': pessoa})
 
-
+@login_required
 def editar(request, id):
     pessoa = get_object_or_404(Pessoa, id=id)
     if request.method == 'POST':
@@ -56,7 +56,7 @@ def editar(request, id):
         form = PessoaForm(instance=pessoa)
     return render(request, 'cadastro/editar.html', {'form': form, 'pessoa': pessoa})
 
-
+@login_required
 def deletar(request, id):
     pessoa = get_object_or_404(Pessoa, id=id)
     if request.method == 'POST':
