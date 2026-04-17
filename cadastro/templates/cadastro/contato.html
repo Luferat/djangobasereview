@@ -8,10 +8,11 @@
 
 <h2>Faça Contato</h2>
 <p>Preencha todos os campos para falar conosco.</p>
-<form>
 
-    Campos do form entram aqui
-
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
 </form>
 
 {% endblock %}

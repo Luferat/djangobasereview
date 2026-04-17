@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory, BaseInlineFormSet
-from .models import Pessoa, Telefone
+from .models import Contato, Pessoa, Telefone
 
 
 class PessoaForm(forms.ModelForm):
@@ -43,3 +43,15 @@ TelefoneFormSet = inlineformset_factory(
     extra=1,
     can_delete=True,
 )
+
+
+class ContatoForm(forms.ModelForm):
+    class Meta:
+        model = Contato
+        fields = ['nome', 'email', 'assunto', 'mensagem']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'assunto': forms.TextInput(attrs={'class': 'form-control'}),
+            'mensagem':  forms.Textarea(attrs={'class': 'form-control'}),
+        }

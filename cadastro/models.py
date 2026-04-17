@@ -19,3 +19,12 @@ class Telefone(models.Model):
 
     def __str__(self):
         return self.numero
+    
+class Contato(models.Model):
+    nome = models.CharField(max_length=127)
+    email = models.EmailField()
+    assunto = models.CharField(max_length=255)
+    mensagem = models.TextField()
+
+    def __str__(self):
+        return self.nome

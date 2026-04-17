@@ -1,7 +1,7 @@
 # cadastro\views.py
 
 from django.shortcuts import get_object_or_404, redirect, render
-from cadastro.forms import PessoaForm, TelefoneFormSet
+from cadastro.forms import PessoaForm, TelefoneFormSet, ContatoForm
 from cadastro.models import Pessoa
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -90,3 +90,15 @@ def deletar(request, id):
         messages.success(request, 'Pessoa apagada com sucesso!')
         return redirect('index')        
     return render(request, 'cadastro/deletar.html', {'pessoa': pessoa})
+
+
+def contato(request):
+    if request.method == 'POST':
+        form = ContatoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Contato enviado com sucesso!')
+            return redirect('contato')
+    else:
+        form = ContatoForm()
+    return render(request, 'cadastro/contato.html', {'form': form})
